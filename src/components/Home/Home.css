@@ -15,7 +15,7 @@
 }
 
 #home-button {
-  position:fixed;
+  position: fixed;
   top: 3px;
   right: 3px;
   font-family: "Noto Sans", sans-serif;
@@ -24,7 +24,8 @@
   color: white;
   border-radius: 5px;
 }
-#home-button:hover{
-  background-color:white;
-  color:  rgba(0, 0, 0, 0.8);
+
+#home-button:hover {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.8);
 }

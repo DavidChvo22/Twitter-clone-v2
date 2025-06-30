@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-#login-div{
+#login-div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,11 +31,11 @@ body {
   border-radius: 24px;
 }
 
-.login-input{
-    margin: 5px;
-    font-family: "Noto Sans", sans-serif;
+.login-input {
+  margin: 5px;
+  font-family: "Noto Sans", sans-serif;
 }
 
-#login-title{
-    font-family: "Noto Sans", sans-serif;
+#login-title {
+  font-family: "Noto Sans", sans-serif;
 }

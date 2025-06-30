@@ -3,9 +3,8 @@ import "./InputField.css";
 export default function InputField({ tweet, setTweet, tweets, setTweets }) {
   function handleAddTweet() {
     if (tweet.trim() === "") {
-      alert("Empty tweet")
-      return 
-      
+      alert("Empty tweet");
+      return;
     }
     const newTweets = [tweet, ...tweets];
     localStorage.setItem("tweets", JSON.stringify(newTweets));
