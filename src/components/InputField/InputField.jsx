@@ -2,12 +2,15 @@ import "./InputField.css";
 
 export default function InputField({ tweet, setTweet, tweets, setTweets }) {
   function handleAddTweet() {
-    if (tweet.trim() !== "") {
-      const newTweets = [tweet, ...tweets];
-      localStorage.setItem("tweets", JSON.stringify(newTweets));
-      setTweets(newTweets);
-      setTweet("");
+    if (tweet.trim() === "") {
+      alert("Empty tweet")
+      return 
+      
     }
+    const newTweets = [tweet, ...tweets];
+    localStorage.setItem("tweets", JSON.stringify(newTweets));
+    setTweets(newTweets);
+    setTweet("");
   }
 
   function handleInputBox(event) {
