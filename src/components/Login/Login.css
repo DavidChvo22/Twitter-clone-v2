@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-#Login-div{
+#login-div{
   display: flex;
   align-items: center;
   justify-content: center;

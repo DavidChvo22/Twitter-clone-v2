@@ -1,4 +1,5 @@
 import "./InputField.css";
+
 export default function InputField({ tweet, setTweet, tweets, setTweets }) {
   function handleAddTweet() {
     if (tweet.trim() !== "") {
