@@ -13,10 +13,7 @@ export default function Home() {
 
   const [tweet, setTweet] = useState("");
 
-  const [tweets, setTweets] = useState(() => {
-    const savedTweets = localStorage.getItem("tweets");
-    return savedTweets ? JSON.parse(savedTweets) : [];
-  });
+  const [tweets, setTweets] = useState("");
 
   return (
     <div id="home-div">
