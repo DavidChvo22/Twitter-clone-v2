@@ -11,9 +11,6 @@ export default function TweetShower({ tweets, setTweets }) {
     fetchTweets();
   }, [setTweets]);
    
-  useEffect(() => {
-     console.log("tweets:", tweets);
-   }, [tweets]);
 
   async function handleDeleteTweet(id) {
     await fetch(`http://localhost:3001/${id}` , { method: "DELETE" });
