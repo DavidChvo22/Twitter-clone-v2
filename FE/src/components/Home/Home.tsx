@@ -1,8 +1,9 @@
-import InputField from "../InputField/InputField.jsx";
-import TweetShower from "../TweetShower/TweetShower.jsx";
+import InputField from "../InputField/InputField";
+import TweetShower from "../TweetShower/TweetShower";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import type { Tweet } from "../Types/tweet"
 
 export default function Home() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Home() {
 
   const [tweet, setTweet] = useState("");
 
-  const [tweets, setTweets] = useState("");
+  const [tweets, setTweets] = useState<Tweet[]>([]);
 
   return (
     <div id="home-div">

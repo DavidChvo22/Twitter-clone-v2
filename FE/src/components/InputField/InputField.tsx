@@ -1,7 +1,16 @@
 import "./InputField.css";
+import type { Tweet } from "../Types/tweet";
 
-export default function InputField({ tweet, setTweet, tweets, setTweets }) {
-  async function handleAddTweet(event) {
+type InputFieldProps = {
+  tweet: string;
+  setTweet: React.Dispatch<React.SetStateAction<string>>;
+  tweets: Tweet[];
+  setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>;
+};
+
+
+export default function InputField({ tweet, setTweet, tweets, setTweets }: InputFieldProps) {
+  async function handleAddTweet(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (tweet.trim() === "") {
       alert("Empty tweet");
@@ -23,7 +32,7 @@ export default function InputField({ tweet, setTweet, tweets, setTweets }) {
     }
   }
 
-  function handleInputBox(event) {
+  function handleInputBox(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setTweet(event.target.value);
   }
 

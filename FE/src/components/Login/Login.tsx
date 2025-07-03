@@ -9,15 +9,15 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  function handleEmailInput(event) {
+  function handleEmailInput(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
   }
 
-  function handlePasswordInput(event) {
+  function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value);
   }
 
-  function handleLogin(event) {
+  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (email.length < 6 || password.length < 6) {
       alert("Email and password must be at least 6 characters");
