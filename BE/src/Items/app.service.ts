@@ -15,7 +15,7 @@ export class AppService {
       id: uuidv4(),
       content: itemData.content,
     };
-    this.items.push(newItem);
+    this.items.unshift(newItem);
     console.log('New tweet created:', newItem);
     return newItem;
   }
