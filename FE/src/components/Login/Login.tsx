@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -27,9 +26,20 @@ export default function Login() {
   }
 
   return (
-    <div id="login-div">
-      <form id="login-form" onSubmit={handleLogin}>
-        <h1 id="login-title">Login</h1>
+    <div id="login-div" className="flex items-center justify-center h-screen">
+      <form
+        id="login-form"
+        className="
+            flex flex-col items-center
+            px-10 py-12
+          text-white
+          bg-[rgba(0,0,0,0.8)]
+            rounded-[10px]
+            w-[10%] min-w-[300px]
+            mx-auto"
+        onSubmit={handleLogin}
+      >
+        <h1 id="login-title" className="text-[36px]">Login</h1>
         <input
           className="login-input"
           placeholder="E-mail"
@@ -46,7 +56,7 @@ export default function Login() {
           onChange={handlePasswordInput}
         ></input>
         <br />
-        <button id="login-button" type="submit">
+        <button id="login-button" type="submit" className="hover:bg-gray-600 px-5 rounded-4xl mt-[8px]">
           Log In
         </button>
       </form>
