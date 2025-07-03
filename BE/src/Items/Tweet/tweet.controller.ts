@@ -9,27 +9,27 @@ import {
   HttpStatus,
   NotFoundException,
 } from '@nestjs/common';
-import { AppService } from './app.service';
-import { Item } from './Interfaces/item.interface';
+import { TweetService } from './tweet.service';
+import { Item } from '../Interfaces/item.interface';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class TweetController {
+  constructor(private readonly tweetService: TweetService) {}
 
   @Get()
   getTweet(): Item[] {
-    return this.appService.findAll();
+    return this.tweetService.findAll();
   }
 
   @Post()
   create(@Body() itemData: { content: string }): Item {
-    return this.appService.create(itemData);
+    return this.tweetService.create(itemData);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id') id: string): void {
-    const deleted = this.appService.delete(id);
+    const deleted = this.tweetService.delete(id);
 
     if (!deleted) {
       throw new NotFoundException(`Item with ID ${id} not found.`);

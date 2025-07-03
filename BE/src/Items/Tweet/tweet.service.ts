@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Item } from './Interfaces/item.interface';
+import { Item } from '../Interfaces/item.interface';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
-export class AppService {
+export class TweetService {
   private readonly items: Item[] = [];
 
   findAll(): Item[] {
