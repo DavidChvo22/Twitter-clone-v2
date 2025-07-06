@@ -31,12 +31,8 @@ export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
       <ul
         id="tweetShower-ul"
         className="
-            bg-white  
-              max-w-[calc(100%-5px)] 
-              min-h-[150px] 
-              h-[calc(100%-5px)] 
-              m-[5px] 
-              overflow-auto"
+            bg-white max-w-[calc(100%-5px)] min-h-[150px] h-[calc(100%-5px)] 
+              m-[5px] overflow-auto"
       >
         {tweets.length === 0 ? (
           <li>No Tweets yet</li>
@@ -46,26 +42,15 @@ export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
               id="tweetShower-li"
               key={tweet.id}
               className="
-                    max-w-[calc(100%-5px)] 
-                    ml-[5px] 
-                    flex 
-                    flex-wrap 
-                    items-center 
-                    gap-0.5 
-                    my-[2px] "
+                    max-w-[calc(100%-5px)] ml-[5px] flex flex-wrap 
+                    items-center gap-0.5 my-[2px] "
             >
               {tweet.content}
               <button
                 id="tweetShower-button"
                 className="
-                      float-right mx-[10px]
-                    bg-red-700 
-                    text-white 
-                      rounded 
-                    hover:bg-white 
-                    hover:text-red-700 
-                      border 
-                    border-black px-1 "
+                      float-right mx-[10px] bg-red-700 text-white rounded hover:bg-white 
+                    hover:text-red-700 border border-black px-1 "
                 type="button"
                 onClick={() => handleDeleteTweet(tweet.id)}
               >

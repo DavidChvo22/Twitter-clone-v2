@@ -1,21 +1,15 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogin as helpLogin } from "./useLogin"
+import { useLogin } from "./useLogin"
 
 export default function Login() {
-  const [username, setUsername] = useState("");
 
-  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
+  const { username, setUsername, password, setPassword, handleLogin } = useLogin(navigate);
 
   function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value);
-  }
-
-  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
-    helpLogin(event, username, password, navigate)
   }
 
   function handleRegister(event: React.MouseEvent<HTMLButtonElement>) {
@@ -26,25 +20,13 @@ export default function Login() {
     <div
       id="login-div"
       className="
-            flex 
-            items-center 
-            justify-center 
-            h-screen"
+            flex items-center justify-center h-screen"
     >
       <form
         id="login-form"
         className="
-              flex 
-              flex-col 
-              items-center
-              px-10 
-              py-12
-            text-white
-            bg-[rgba(0,0,0,0.8)]
-              rounded-[10px]
-              w-[10%] 
-              min-w-[300px]
-              mx-auto"
+              flex flex-col items-center px-10 py-12 text-white
+            bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
         onSubmit={handleLogin}
       >
         <h1 id="login-title" 
@@ -56,6 +38,7 @@ export default function Login() {
           placeholder="Username"
           type="text"
           name="username"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <br />
@@ -64,6 +47,7 @@ export default function Login() {
           placeholder="Password"
           type="password"
           name="password"
+          value={password}
           onChange={handlePasswordInput}
         ></input>
         <br />
@@ -71,20 +55,14 @@ export default function Login() {
           id="login-button"
           type="submit"
           className="
-              hover:bg-gray-600 
-                px-5 
-                rounded-4xl 
-                mt-[8px]"
+              hover:bg-gray-600 px-5 rounded-4xl mt-[8px]"
         >
           Log In
         </button>
         <button
           type="button"
           className="
-                hover:bg-gray-600 
-                px-5 
-                rounded-4xl 
-                mt-[8px]"
+                hover:bg-gray-600 px-5 rounded-4xl mt-[8px]"
           onClick={handleRegister}
         >
           Register
