@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRegister as helpRegister } from './useRegister'
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -24,31 +25,8 @@ export default function Register() {
     setConfirmPassword(event.target.value);
   }
 
-  async function handleRegister(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (password.length < 6 || password !== confirmPassword) {
-      alert(
-        "Email and password must be at least 6 characters and passwords must match"
-      );
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3001/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: email, password }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message || "Registration failed");
-        return;
-      }
-      alert("Registration successful! Please log in.");
-      navigate("/");
-    } catch (err) {
-      alert("An error occurred during registration.");
-    }
+  function handleRegister(event: React.FormEvent<HTMLFormElement>) {
+    helpRegister(event, email, password, confirmPassword, navigate);
   }
 
   return (
