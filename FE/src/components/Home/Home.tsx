@@ -17,7 +17,18 @@ export default function Home() {
 
   return (
     <div id="home-div" className="h-screen">
-      <div className="absolute top-0 bg-gray-800 m-[10px] w-[50%] h-[70vh] left-1/2 -translate-x-1/2 flex flex-col min-h-[218px]">
+      <div className="
+                  absolute 
+                  top-0 
+                  bg-gray-800 
+                  m-[10px] 
+                  w-[50%] 
+                  h-[70vh] 
+                  left-1/2 
+                  -translate-x-1/2 
+                  flex 
+                  flex-col 
+                  min-h-[218px]">
         <InputField
           tweet={tweet}
           setTweet={setTweet}
@@ -27,7 +38,22 @@ export default function Home() {
         <TweetShower tweets={tweets} setTweets={setTweets}></TweetShower>
       </div>
       <button
-        className="bg-blue-500 text-white p-4 fixed top-0 right-0 m-[5px] hover:bg-red-500 inline-flex items-center px-4 py-2 rounded border border-black"
+        className="
+            bg-blue-500 
+            text-white 
+              p-4 
+              fixed 
+              top-0 
+              right-0 
+              m-[5px] 
+              hover:bg-red-500 
+              inline-flex 
+              items-center 
+              px-4 
+              py-2 
+              rounded 
+              border 
+            border-black"
         onClick={handleLogOut}
       >
         Log Out

@@ -43,20 +43,32 @@ export default function Login() {
   }
 
   return (
-    <div id="login-div" className="flex items-center justify-center h-screen">
+    <div
+      id="login-div"
+      className="
+            flex 
+            items-center 
+            justify-center 
+            h-screen"
+    >
       <form
         id="login-form"
         className="
-            flex flex-col items-center
-            px-10 py-12
-          text-white
-          bg-[rgba(0,0,0,0.8)]
-            rounded-[10px]
-            w-[10%] min-w-[300px]
-            mx-auto"
+              flex 
+              flex-col 
+              items-center
+              px-10 
+              py-12
+            text-white
+            bg-[rgba(0,0,0,0.8)]
+              rounded-[10px]
+              w-[10%] 
+              min-w-[300px]
+              mx-auto"
         onSubmit={handleLogin}
       >
-        <h1 id="login-title" className="text-[36px]">
+        <h1 id="login-title" 
+            className="text-[36px]">
           Login
         </h1>
         <input
@@ -64,7 +76,7 @@ export default function Login() {
           placeholder="Username"
           type="text"
           name="username"
-          onChange={e => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
         ></input>
         <br />
         <input
@@ -78,13 +90,21 @@ export default function Login() {
         <button
           id="login-button"
           type="submit"
-          className="hover:bg-gray-600 px-5 rounded-4xl mt-[8px]"
+          className="
+              hover:bg-gray-600 
+                px-5 
+                rounded-4xl 
+                mt-[8px]"
         >
           Log In
         </button>
         <button
           type="button"
-          className="hover:bg-gray-600 px-5 rounded-4xl mt-[8px]"
+          className="
+                hover:bg-gray-600 
+                px-5 
+                rounded-4xl 
+                mt-[8px]"
           onClick={handleRegister}
         >
           Register
