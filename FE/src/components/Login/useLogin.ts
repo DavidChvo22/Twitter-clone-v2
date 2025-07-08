@@ -1,8 +1,31 @@
 import { useState } from "react";
 
-export function useLogin(navigate: (path: string) => void) {
+interface UseLoginReturn {
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  handleLogin: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handleUsernameInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleRegister: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export function useLogin(navigate: (path: string) => void): UseLoginReturn {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(event.target.value);
+  }
+
+  function handleRegister(event: React.MouseEvent<HTMLButtonElement>) {
+    navigate("/Register");
+  }
+
+  function handleUsernameInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setUsername(event.target.value);
+  }
 
   async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,5 +56,8 @@ export function useLogin(navigate: (path: string) => void) {
     password,
     setPassword,
     handleLogin,
+    handleUsernameInput,
+    handlePasswordInput,
+    handleRegister,
   };
 }

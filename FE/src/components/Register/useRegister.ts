@@ -1,15 +1,46 @@
 import { useState } from "react";
 
-export function useRegister(navigate: (path: string) => void) {
+interface UseRegisterReturn {
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  confirmPassword: string;
+  setConfirmPassword: React.Dispatch<React.SetStateAction<string>>;
+  handleRegister: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handleUsernameInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleConfirmPasswordInput: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+}
+
+export function useRegister(
+  navigate: (path: string) => void
+): UseRegisterReturn {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  function handleUsernameInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setUsername(event.target.value);
+  }
+
+  function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(event.target.value);
+  }
+
+  function handleConfirmPasswordInput(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    setConfirmPassword(event.target.value);
+  }
 
   async function handleRegister(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (password.length < 6 || password !== confirmPassword) {
       alert(
-        "Email and password must be at least 6 characters and passwords must match"
+        "Username and password must be at least 6 characters and passwords must match"
       );
       return;
     }
@@ -44,5 +75,8 @@ export function useRegister(navigate: (path: string) => void) {
     confirmPassword,
     setConfirmPassword,
     handleRegister,
+    handleUsernameInput,
+    handlePasswordInput,
+    handleConfirmPasswordInput,
   };
 }

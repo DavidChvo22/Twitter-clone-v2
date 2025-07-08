@@ -1,34 +1,18 @@
 import { useRegister } from "./useRegister";
-
 import { useNavigate } from "react-router-dom";
-
 
 export default function Register() {
   const navigate = useNavigate();
-  
+
   const {
     username,
-    setUsername,
     password,
-    setPassword,
     confirmPassword,
-    setConfirmPassword,
-    handleRegister
+    handleRegister,
+    handleUsernameInput,
+    handlePasswordInput,
+    handleConfirmPasswordInput,
   } = useRegister(navigate);
-  
-  function handleEmailInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setUsername(event.target.value);
-  }
-
-  function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-  }
-
-  function handleConfirmPasswordInput(
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
-    setConfirmPassword(event.target.value);
-  }
 
   return (
     <div
@@ -48,7 +32,7 @@ export default function Register() {
           type="text"
           name="username"
           value={username}
-          onChange={handleEmailInput}
+          onChange={handleUsernameInput}
         ></input>
         <br />
         <input

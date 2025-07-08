@@ -1,20 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "./useLogin"
+import { useLogin } from "./useLogin";
 
 export default function Login() {
-
-
   const navigate = useNavigate();
 
-  const { username, setUsername, password, setPassword, handleLogin } = useLogin(navigate);
-
-  function handlePasswordInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-  }
-
-  function handleRegister(event: React.MouseEvent<HTMLButtonElement>) {
-    navigate("/Register");
-  }
+  const {
+    username,
+    handleUsernameInput,
+    password,
+    handlePasswordInput,
+    handleLogin,
+    handleRegister,
+  } = useLogin(navigate);
 
   return (
     <div
@@ -29,8 +26,7 @@ export default function Login() {
             bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
         onSubmit={handleLogin}
       >
-        <h1 id="login-title" 
-            className="text-[36px]">
+        <h1 id="login-title" className="text-[36px]">
           Login
         </h1>
         <input
@@ -39,7 +35,7 @@ export default function Login() {
           type="text"
           name="username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={handleUsernameInput}
         ></input>
         <br />
         <input
