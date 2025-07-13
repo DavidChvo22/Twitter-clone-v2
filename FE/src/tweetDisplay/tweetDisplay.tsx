@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-
-type Tweet = {
-  id: string;
-  content: string;
-};
+import type { Tweet } from "../home/tweet";
 
 type TweetShowerProps = {
   tweets: Tweet[];

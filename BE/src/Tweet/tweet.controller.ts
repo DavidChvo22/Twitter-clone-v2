@@ -10,7 +10,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { TweetService } from './tweet.service';
-import { Item } from '../Interfaces/item.interface';
+import { Item } from './interfaces/item.interface';
 
 @Controller()
 export class TweetController {

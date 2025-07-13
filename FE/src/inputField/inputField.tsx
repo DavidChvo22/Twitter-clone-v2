@@ -1,4 +1,4 @@
-import type { Tweet } from "../Types/tweet";
+import type { Tweet } from "../home/tweet";
 
 type InputFieldProps = {
   tweet: string;

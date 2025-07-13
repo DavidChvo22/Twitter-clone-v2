@@ -1,8 +1,8 @@
-import InputField from "../InputField/InputField";
-import TweetShower from "../TweetShower/TweetShower";
+import InputField from "../inputField/inputField";
+import TweetShower from "../tweetDisplay/tweetDisplay";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { Tweet } from "../Types/tweet";
+import type { Tweet } from "./tweet";
 
 export default function Home() {
   const navigate = useNavigate();
