@@ -9,4 +9,4 @@ export class AppController {
       message: 'API works',
     };
   }
-} 
+}

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "./useLogin";
 import { useState } from "react";
+import './login.css'
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -20,9 +21,7 @@ export default function Login() {
     >
       <form
         id="login-form"
-        className="
-              flex flex-col items-center px-10 py-12 text-white
-            bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
+        className="login-form"
         onSubmit={(event) => handleLogin(event, username, password)}
       >
         <h1 id="login-title" className="text-[36px]">
