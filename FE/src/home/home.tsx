@@ -1,4 +1,4 @@
-import InputField from "../ui/inputField/inputField";
+import InputField from "../ui/tweetInput/tweetInput";
 import TweetShower from "../ui/tweetDisplay/tweetDisplay";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
