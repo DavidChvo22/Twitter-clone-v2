@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import type { Tweet } from "../home/tweet";
+import type { Tweet } from "../../home/tweet";
 
 type TweetShowerProps = {
   tweets: Tweet[];
@@ -9,7 +9,7 @@ type TweetShowerProps = {
 export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
   useEffect(() => {
     async function fetchTweets() {
-      const response = await fetch("http://localhost:3001");
+      const response = await fetch("http://localhost:3001/tweets");
       const data: Tweet[] = await response.json();
       setTweets(data);
     }
@@ -17,7 +17,7 @@ export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
   }, [setTweets]);
 
   async function handleDeleteTweet(id: string) {
-    await fetch(`http://localhost:3001/${id}`, { method: "DELETE" });
+    await fetch(`http://localhost:3001/tweets/${id}`, { method: "DELETE" });
     setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
   }
 

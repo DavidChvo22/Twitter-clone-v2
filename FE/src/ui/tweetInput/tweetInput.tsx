@@ -1,4 +1,4 @@
-import type { Tweet } from "../home/tweet";
+import type { Tweet } from "../../home/tweet";
 
 type InputFieldProps = {
   tweet: string;
@@ -20,7 +20,7 @@ export default function InputField({
       return;
     }
     try {
-      const response = await fetch("http://localhost:3001", {
+      const response = await fetch("http://localhost:3001/tweets", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: tweet }),

@@ -12,7 +12,7 @@ import {
 import { TweetService } from './tweet.service';
 import { Item } from './interfaces/item.interface';
 
-@Controller()
+@Controller('tweets')
 export class TweetController {
   constructor(private readonly tweetService: TweetService) {}
 
