@@ -1,18 +1,15 @@
 import { useRegister } from "./useRegister";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Register() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
 
-  const {
-    username,
-    password,
-    confirmPassword,
-    handleRegister,
-    handleUsernameInput,
-    handlePasswordInput,
-    handleConfirmPasswordInput,
-  } = useRegister(navigate);
+  const { handleRegister } = useRegister(navigate);
 
   return (
     <div
@@ -24,7 +21,9 @@ export default function Register() {
         className="
               flex flex-col items-center px-10 py-12 text-white
             bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
-        onSubmit={handleRegister}
+        onSubmit={(event) =>
+          handleRegister(event, username, password, confirmPassword)
+        }
       >
         <h1 className="text-[36px]">Register</h1>
         <input
@@ -32,7 +31,7 @@ export default function Register() {
           type="text"
           name="username"
           value={username}
-          onChange={handleUsernameInput}
+          onChange={(e) => setUsername(e.target.value)}
         ></input>
         <br />
         <input
@@ -40,14 +39,14 @@ export default function Register() {
           type="password"
           name="password"
           value={password}
-          onChange={handlePasswordInput}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
         <input
           placeholder="Confirm Password"
           type="password"
           name="password"
           value={confirmPassword}
-          onChange={handleConfirmPasswordInput}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         ></input>
         <br />
         <button

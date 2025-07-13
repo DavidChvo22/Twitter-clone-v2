@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "./useLogin";
+import { useState } from "react";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const {
-    username,
-    handleUsernameInput,
-    password,
-    handlePasswordInput,
     handleLogin,
-    handleRegister,
   } = useLogin(navigate);
 
   return (
@@ -24,7 +23,7 @@ export default function Login() {
         className="
               flex flex-col items-center px-10 py-12 text-white
             bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
-        onSubmit={handleLogin}
+        onSubmit={(event) => handleLogin(event, username, password)}
       >
         <h1 id="login-title" className="text-[36px]">
           Login
@@ -35,7 +34,7 @@ export default function Login() {
           type="text"
           name="username"
           value={username}
-          onChange={handleUsernameInput}
+          onChange={(e) => setUsername(e.target.value)}
         ></input>
         <br />
         <input
@@ -44,7 +43,7 @@ export default function Login() {
           type="password"
           name="password"
           value={password}
-          onChange={handlePasswordInput}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
         <button
@@ -59,7 +58,7 @@ export default function Login() {
           type="button"
           className="
                 hover:bg-gray-600 px-5 rounded-4xl mt-[8px]"
-          onClick={handleRegister}
+          onClick={(e) => navigate("/Register")}
         >
           Register
         </button>

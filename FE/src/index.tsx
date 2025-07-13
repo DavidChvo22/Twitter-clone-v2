@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import App from "./components/App/App";
+import App from "./app/app";
 import "./index.css"; 
 
 const entryPoint = document.getElementById("root")!;
