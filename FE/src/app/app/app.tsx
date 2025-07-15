@@ -1,4 +1,4 @@
-import Main from "../router/router";
+import Main from "../router/Router";
 
 export default function App() {
   return <Main></Main>;
