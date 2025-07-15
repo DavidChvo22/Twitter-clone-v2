@@ -1,0 +1,6 @@
+@reference "tailwindcss";
+
+.register-form {
+  @apply flex flex-col items-center px-10 py-12 text-white
+            bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto
+}

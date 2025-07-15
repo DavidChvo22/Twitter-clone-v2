@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import type { Tweet } from "../../home/tweet";
+import './tweetDisplay.css';
 
-type TweetShowerProps = {
+type TweetDisplayProps = {
   tweets: Tweet[];
   setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>;
 };
 
-export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
+export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
   useEffect(() => {
     async function fetchTweets() {
       const response = await fetch("http://localhost:3001/tweets");
@@ -24,29 +25,20 @@ export default function TweetShower({ tweets, setTweets }: TweetShowerProps) {
   return (
     <>
       <br />
-      <ul
-        id="tweetShower-ul"
-        className="
-            bg-white max-w-[calc(100%-5px)] min-h-[150px] h-[calc(100%-5px)] 
-              m-[5px] overflow-auto"
-      >
+      <ul id="tweetDisplay-ul" className="tweet-display-list">
         {tweets.length === 0 ? (
           <li>No Tweets yet</li>
         ) : (
           tweets.map((tweet) => (
             <li
-              id="tweetShower-li"
+              id="tweetDisplay-li"
               key={tweet.id}
-              className="
-                    max-w-[calc(100%-5px)] ml-[5px] flex flex-wrap 
-                    items-center gap-0.5 my-[2px] "
+              className="tweet-display-list-item"
             >
               {tweet.content}
               <button
-                id="tweetShower-button"
-                className="
-                      float-right mx-[10px] bg-red-700 text-white rounded hover:bg-white 
-                    hover:text-red-700 border border-black px-1 "
+                id="tweetDisplay-button"
+                className="delete-button"
                 type="button"
                 onClick={() => handleDeleteTweet(tweet.id)}
               >

@@ -41,7 +41,6 @@ export default function InputField({
 
   return (
     <form
-      //className="flex items-center bg-gray-800 max-w-[40vw] mx-auto h-[70vh] mt-[5px] rounded relative"
       onSubmit={handleAddTweet}
     >
       <div

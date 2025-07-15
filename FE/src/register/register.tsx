@@ -1,6 +1,7 @@
 import { useRegister } from "./useRegister";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import './register.css'
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -18,9 +19,7 @@ export default function Register() {
             flex items-center justify-center h-screen"
     >
       <form
-        className="
-              flex flex-col items-center px-10 py-12 text-white
-            bg-[rgba(0,0,0,0.8)] rounded-[10px] w-[10%] min-w-[300px] mx-auto"
+        className="register-form"
         onSubmit={(event) =>
           handleRegister(event, username, password, confirmPassword)
         }
