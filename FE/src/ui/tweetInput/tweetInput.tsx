@@ -1,4 +1,5 @@
-import type { Tweet } from "../../home/tweet";
+import type { Tweet } from "../../utils/tweet";
+import { apiUrl } from "../../utils/api";
 
 type InputFieldProps = {
   tweet: string;
@@ -20,7 +21,7 @@ export default function InputField({
       return;
     }
     try {
-      const response = await fetch("http://localhost:3001/tweets", {
+      const response = await fetch(`${apiUrl}/tweets`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: tweet }),
@@ -40,9 +41,7 @@ export default function InputField({
   }
 
   return (
-    <form
-      onSubmit={handleAddTweet}
-    >
+    <form onSubmit={handleAddTweet}>
       <div
         className="
                   flex items-center gap-0.5 "

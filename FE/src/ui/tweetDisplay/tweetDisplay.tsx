@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import type { Tweet } from "../../home/tweet";
-import './tweetDisplay.css';
+import type { Tweet } from "../../utils/tweet";
+import "./tweetDisplay.css";
+import { apiUrl } from "../../utils/api";
 
 type TweetDisplayProps = {
   tweets: Tweet[];
@@ -8,9 +9,10 @@ type TweetDisplayProps = {
 };
 
 export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
+
   useEffect(() => {
     async function fetchTweets() {
-      const response = await fetch("http://localhost:3001/tweets");
+      const response = await fetch(`${apiUrl}/tweets`);
       const data: Tweet[] = await response.json();
       setTweets(data);
     }
@@ -18,7 +20,7 @@ export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
   }, [setTweets]);
 
   async function handleDeleteTweet(id: string) {
-    await fetch(`http://localhost:3001/tweets/${id}`, { method: "DELETE" });
+    await fetch(`${apiUrl}/tweets/${id}`, { method: "DELETE" });
     setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
   }
 

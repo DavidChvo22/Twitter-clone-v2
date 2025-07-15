@@ -1,6 +1,6 @@
-export function useRegister(
-  navigate: (path: string) => void
-) {
+import { apiUrl } from "../utils/api";
+
+export function useRegister(navigate: (path: string) => void) {
   async function handleRegister(
     event: React.FormEvent<HTMLFormElement>,
     username: string,
@@ -17,7 +17,7 @@ export function useRegister(
 
     try {
       console.log("About to send fetch request");
-      const response = await fetch("http://localhost:3001/auth/register", {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, password }),

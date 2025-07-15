@@ -2,7 +2,7 @@ import InputField from "../ui/tweetInput/TweetInput";
 import TweetShower from "../ui/tweetDisplay/TweetDisplay";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { Tweet } from "./tweet";
+import type { Tweet } from "../utils/tweet";
 import './home.css'
 
 export default function Home() {
