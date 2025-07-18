@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TweetModule } from './tweet/tweet.module';
+import { TweetModule } from './twe/tweet.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './use/users.module';
+import { AuthModule } from './au/auth.module';
 import { AppController } from './app.controller';
 
 @Module({
