@@ -1,5 +1,5 @@
-import InputField from "../ui/tweetInput/TweetInput";
-import TweetShower from "../ui/tweetDisplay/TweetDisplay";
+import InputField from "../tweets/add/TweetAdd";
+import TweetShower from "../tweets/list/TweetList";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Tweet } from "../utils/tweet";

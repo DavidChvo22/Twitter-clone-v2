@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import type { Tweet } from "../../utils/tweet";
-import "./tweetDisplay.css";
-import { apiUrl } from "../../utils/api";
+import "./tweetList.css";
+import { api } from "../../utils/api";
 
 type TweetDisplayProps = {
   tweets: Tweet[];
@@ -12,16 +12,15 @@ export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
 
   useEffect(() => {
     async function fetchTweets() {
-      const response = await fetch(`${apiUrl}/tweets`);
-      const data: Tweet[] = await response.json();
+      const data: Tweet[] = await api.get('/tweets');
       setTweets(data);
     }
     fetchTweets();
   }, [setTweets]);
 
   async function handleDeleteTweet(id: string) {
-    await fetch(`${apiUrl}/tweets/${id}`, { method: "DELETE" });
-    setTweets((prev) => prev.filter((tweet) => tweet.id !== id));
+    await api.delete(`/tweets/${id}`);
+    setTweets((prev) => prev.filter((tweet) => tweet._id !== id));
   }
 
   return (
@@ -34,7 +33,7 @@ export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
           tweets.map((tweet) => (
             <li
               id="tweetDisplay-li"
-              key={tweet.id}
+              key={tweet._id}
               className="tweet-display-list-item"
             >
               {tweet.content}
@@ -42,7 +41,7 @@ export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
                 id="tweetDisplay-button"
                 className="delete-button"
                 type="button"
-                onClick={() => handleDeleteTweet(tweet.id)}
+                onClick={() => handleDeleteTweet(tweet._id)}
               >
                 Delete
               </button>

@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     TweetModule,
     MongooseModule.forRoot('mongodb://localhost/nest-auth-tutorial'),
     UsersModule,
