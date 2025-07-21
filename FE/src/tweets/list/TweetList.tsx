@@ -1,44 +1,37 @@
-import React, { useEffect } from "react";
-import type { Tweet } from "../../utils/tweet";
+import { useEffect } from "react";
 import "./tweetList.css";
-import { api } from "../../utils/api";
+import { useTweetDelete, useTweetFetch } from "../../store/useTweetActions";
+import { useTweetStore } from "../../store/tweetStore";
 
-type TweetDisplayProps = {
-  tweets: Tweet[];
-  setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>;
-};
-
-export default function TweetDisplay({ tweets, setTweets }: TweetDisplayProps) {
+export default function TweetList() {
+  const tweets = useTweetStore((state) => state.tweets);
+  const fetchTweets = useTweetFetch();
+  const deleteTweet = useTweetDelete();
 
   useEffect(() => {
-    async function fetchTweets() {
-      const data: Tweet[] = await api.get('/tweets');
-      setTweets(data);
-    }
     fetchTweets();
-  }, [setTweets]);
+  }, [fetchTweets]);
 
   async function handleDeleteTweet(id: string) {
-    await api.delete(`/tweets/${id}`);
-    setTweets((prev) => prev.filter((tweet) => tweet._id !== id));
+    await deleteTweet(id);
   }
 
   return (
     <>
       <br />
-      <ul id="tweetDisplay-ul" className="tweet-display-list">
+      <ul id="tweetlist-ul" className="tweet-list-list">
         {tweets.length === 0 ? (
           <li>No Tweets yet</li>
         ) : (
           tweets.map((tweet) => (
             <li
-              id="tweetDisplay-li"
+              id="tweetList-li"
               key={tweet._id}
-              className="tweet-display-list-item"
+              className="tweet-list-list-item"
             >
               {tweet.content}
               <button
-                id="tweetDisplay-button"
+                id="tweetlist-button"
                 className="delete-button"
                 type="button"
                 onClick={() => handleDeleteTweet(tweet._id)}

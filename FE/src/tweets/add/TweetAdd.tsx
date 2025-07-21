@@ -1,19 +1,17 @@
 import { api } from "../../utils/api";
-import type { Tweet } from "../../utils/tweet";
+import { useTweetAdd } from "../../store/useTweetActions";
 
 type TweetAddProps = {
   tweet: string;
   setTweet: React.Dispatch<React.SetStateAction<string>>;
-  tweets: Tweet[];
-  setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>;
 };
 
 export default function TweetAdd({
   tweet,
   setTweet,
-  tweets,
-  setTweets,
 }: TweetAddProps) {
+  const addTweet = useTweetAdd();
+
   async function handleAddTweet(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (tweet.trim() === "") {
@@ -22,7 +20,7 @@ export default function TweetAdd({
     }
     try {
       const newTweet = await api.post('/tweets', { content: tweet });
-      setTweets([newTweet, ...tweets]);
+      addTweet(newTweet)
       setTweet("");
     } catch (error) {
       if (error instanceof Error) {
