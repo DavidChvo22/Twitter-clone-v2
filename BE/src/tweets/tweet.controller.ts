@@ -14,7 +14,7 @@ import {
 import { TweetService } from './tweet.service';
 import { Tweet } from './schemas/tweet.schema';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthReq } from '../auth/auth-req.interface';
+import { AuthenticatedRequest } from 'src/auth/authenticated-request.interface';
 
 @Controller('tweets')
 export class TweetController {
@@ -29,9 +29,9 @@ export class TweetController {
   @Post()
   async create(
     @Body() body: { content: string },
-    @Request() req: AuthReq,
+    @Request() req: AuthenticatedRequest,
   ): Promise<Tweet> {
-    return await this.tweetService.create(body.content, req.user.sub);
+    return await this.tweetService.create(body.content, req.user.userId);
   }
 
   @Delete(':id')
