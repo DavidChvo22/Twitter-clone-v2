@@ -1,4 +1,4 @@
-import { apiUrl } from "../utils/api";
+import { apiUrl } from "../../utils/api";
 
 export function useRegister(navigate: (path: string) => void) {
   async function handleRegister(

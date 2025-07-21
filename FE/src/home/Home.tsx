@@ -1,5 +1,5 @@
-import InputField from "../tweets/add/TweetAdd";
-import TweetShower from "../tweets/list/TweetList";
+import TweetAdd from "../tweets/add/TweetAdd";
+import TweetList from "../tweets/list/TweetList";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Tweet } from "../utils/tweet";
@@ -19,13 +19,13 @@ export default function Home() {
   return (
     <div id="home-div" className="h-screen">
       <div className="home-div">
-        <InputField
+        <TweetAdd
           tweet={tweet}
           setTweet={setTweet}
           tweets={tweets}
           setTweets={setTweets}
-        ></InputField>
-        <TweetShower tweets={tweets} setTweets={setTweets}></TweetShower>
+        ></TweetAdd>
+        <TweetList tweets={tweets} setTweets={setTweets}></TweetList>
       </div>
       <button
         className="logout-button"

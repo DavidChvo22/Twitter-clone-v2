@@ -1,19 +1,19 @@
 import { api } from "../../utils/api";
 import type { Tweet } from "../../utils/tweet";
 
-type InputFieldProps = {
+type TweetAddProps = {
   tweet: string;
   setTweet: React.Dispatch<React.SetStateAction<string>>;
   tweets: Tweet[];
   setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>;
 };
 
-export default function InputField({
+export default function TweetAdd({
   tweet,
   setTweet,
   tweets,
   setTweets,
-}: InputFieldProps) {
+}: TweetAddProps) {
   async function handleAddTweet(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (tweet.trim() === "") {

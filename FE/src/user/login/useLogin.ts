@@ -1,4 +1,4 @@
-import { apiUrl } from "../utils/api";
+import { apiUrl } from "../../utils/api";
 
 export function useLogin(navigate: (path: string) => void) {
   async function handleLogin(
