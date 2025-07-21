@@ -1,5 +1,5 @@
+import { api } from "../../utils/api";
 import type { Tweet } from "../../utils/tweet";
-import { apiUrl } from "../../utils/api";
 
 type InputFieldProps = {
   tweet: string;
@@ -21,18 +21,15 @@ export default function InputField({
       return;
     }
     try {
-      const response = await fetch(`${apiUrl}/tweets`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: tweet }),
-      });
-      if (!response.ok) throw new Error("Failed to add tweet");
-      const newTweet = await response.json();
-
+      const newTweet = await api.post('/tweets', { content: tweet });
       setTweets([newTweet, ...tweets]);
       setTweet("");
     } catch (error) {
-      alert("Error adding tweet.");
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("Error adding tweet.");
+      }
     }
   }
 
