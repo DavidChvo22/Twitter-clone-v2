@@ -8,28 +8,36 @@ import {
   HttpCode,
   HttpStatus,
   NotFoundException,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { TweetService } from './tweet.service';
-import { Item } from './interfaces/item.interface';
+import { Tweet } from './schemas/tweet.schema';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthReq } from '../auth/auth-req.interface';
 
 @Controller('tweets')
 export class TweetController {
   constructor(private readonly tweetService: TweetService) {}
 
   @Get()
-  getTweet(): Item[] {
+  async getTweet(): Promise<Tweet[]> {
     return this.tweetService.findAll();
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() itemData: { content: string }): Item {
-    return this.tweetService.create(itemData);
+  async create(
+    @Body() body: { content: string },
+    @Request() req: AuthReq,
+  ): Promise<Tweet> {
+    return await this.tweetService.create(body.content, req.user.sub);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id') id: string): void {
-    const deleted = this.tweetService.delete(id);
+  async delete(@Param('id') id: string): Promise<void> {
+    const deleted = await this.tweetService.delete(id);
 
     if (!deleted) {
       throw new NotFoundException(`Item with ID ${id} not found.`);

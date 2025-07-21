@@ -1,34 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { Item } from './interfaces/item.interface';
-import { v4 as uuidv4 } from 'uuid';
+import { Model } from 'mongoose';
+import { Tweet } from './schemas/tweet.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class TweetService {
-  private readonly items: Item[] = [];
+  constructor(@InjectModel(Tweet.name) private tweetModel: Model<Tweet>) {}
 
-  findAll(): Item[] {
-    return this.items;
+  async findAll(): Promise<Tweet[]> {
+    return this.tweetModel.find().exec();
   }
 
-  create(itemData: { content: string }): Item {
-    const newItem: Item = {
-      id: uuidv4(),
-      content: itemData.content,
-    };
-    this.items.unshift(newItem);
-    console.log('New tweet created:', newItem);
-    return newItem;
+  async create(content: string, userId: string): Promise<Tweet> {
+    const newTweet = new this.tweetModel({ content: content, user: userId });
+    return newTweet.save();
   }
 
-  delete(id: string): boolean {
-    const initialLength = this.items.length;
-    const newItems = this.items.filter((item) => item.id !== id);
-    const wasDeleted = newItems.length < initialLength;
-
-    if (!wasDeleted) {
-      return false;
-    }
-    this.items.splice(0, initialLength, ...newItems);
-    return true;
+  async delete(userId: string): Promise<boolean> {
+    const result = await this.tweetModel.deleteOne({ _id: userId }).exec();
+    return result.deletedCount > 0;
   }
 }
