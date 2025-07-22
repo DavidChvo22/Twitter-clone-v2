@@ -1,5 +1,5 @@
-import Main from "../router/Router";
+import Router from "../router/Router";
 
 export default function App() {
-  return <Main></Main>;
+  return <Router></Router>;
 }
