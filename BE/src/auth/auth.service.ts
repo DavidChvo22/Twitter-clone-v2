@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -9,13 +8,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private configService: ConfigService,
-  ) {
-    console.log(
-      'JWT Secret from ConfigService:',
-      this.configService.get<string>('JWT_SECRET'),
-    );
-  }
+  ) {}
 
   async register(username: string, password: string) {
     const existing = await this.usersService.findOne(username);
