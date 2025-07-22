@@ -13,7 +13,8 @@ export class TweetService {
 
   async create(content: string, userId: string): Promise<Tweet> {
     const newTweet = new this.tweetModel({ content: content, user: userId });
-    return newTweet.save();
+    const saved = await newTweet.save();
+    return saved;
   }
 
   async delete(userId: string): Promise<boolean> {

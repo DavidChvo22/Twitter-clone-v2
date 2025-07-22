@@ -10,6 +10,8 @@ export default function Home() {
     navigate("/");
   }
 
+
+
   return (
     <div id="home-div" className="h-screen">
       <div className="home-div">

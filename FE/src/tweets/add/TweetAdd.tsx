@@ -1,10 +1,10 @@
-import { api } from "../../utils/api";
 import { useTweetAdd } from "../../store/useTweetActions";
 import { useState } from "react";
 
 export default function TweetAdd() {
-  const [tweet, setTweet] = useState("");
   const addTweet = useTweetAdd();
+
+  const [tweet, setTweet] = useState("");
 
   async function handleAddTweet(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -13,11 +13,14 @@ export default function TweetAdd() {
       return;
     }
     try {
-      const newTweet = await api.post("/tweets", { content: tweet });
-      addTweet(newTweet);
-      setTweet(""); // reset
+      await addTweet(tweet);
+      setTweet("");
     } catch (error) {
-      alert("Error adding tweet.");
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("Error adding tweet.");
+      }
     }
   }
 
@@ -27,8 +30,26 @@ export default function TweetAdd() {
 
   return (
     <form onSubmit={handleAddTweet}>
-      <textarea value={tweet} onChange={handleInputBox} />
-      <button>Add tweet</button>
+      <div
+        className="
+                  flex items-center gap-0.5 "
+      >
+        <textarea
+          id="inputField-input"
+          className="
+               resize-none bg-white m-[5px] w-[25%] "
+          placeholder="Please enter your tweet"
+          onChange={handleInputBox}
+          value={tweet}
+        />
+        <button
+          id="inputField-button"
+          className="
+                  bg-blue-600 text-white hover:bg-white hover:text-blue-600 px-1.5 "
+        >
+          Add tweet
+        </button>
+      </div>
     </form>
   );
 }
