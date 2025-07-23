@@ -10,6 +10,7 @@ import {
   NotFoundException,
   UseGuards,
   Request,
+  ForbiddenException,
 } from '@nestjs/common';
 import { TweetService } from './tweet.service';
 import { Tweet } from './schemas/tweet.schema';
@@ -34,13 +35,20 @@ export class TweetController {
     return await this.tweetService.create(body.content, req.user.userId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async delete(@Param('id') id: string): Promise<void> {
-    const deleted = await this.tweetService.delete(id);
+  async delete(
+    @Param('id') id: string,
+    @Request() req: AuthenticatedRequest,
+  ): Promise<void> {
+    const result = await this.tweetService.delete(id, req.user.userId);
 
-    if (!deleted) {
-      throw new NotFoundException(`Item with ID ${id} not found.`);
+    if (result === 'not_found') {
+      throw new NotFoundException(`Tweet with ID ${id} not found.`);
+    }
+    if (result === 'forbidden') {
+      throw new ForbiddenException('Nemáte oprávnenie vymazať tento tweet.');
     }
   }
 }

@@ -1,4 +1,4 @@
-export const apiUrl = import.meta.env.VITE_API_URL;
+export const apiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:3001';
 
 const getToken = () => localStorage.getItem('token');
 
@@ -15,7 +15,15 @@ export const api = {
       headers: authHeaders(token),
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      let errorData = {};
+      try {
+        errorData = await response.json();
+      } catch {}
+      throw {
+        status: response.status,
+        message: (errorData as any).message || 'Network response was not ok',
+        data: errorData,
+      };
     }
     return response.json();
   },
@@ -28,8 +36,15 @@ export const api = {
       body: JSON.stringify(body),
     });
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Request failed');
+      let errorData = {};
+      try {
+        errorData = await response.json();
+      } catch {}
+      throw {
+        status: response.status,
+        message: (errorData as any).message || 'Request failed',
+        data: errorData,
+      };
     }
     return response.json();
   },
@@ -41,8 +56,15 @@ export const api = {
       headers: authHeaders(token),
     });
     if (!response.ok && response.status !== 204) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Request failed');
+      let errorData = {};
+      try {
+        errorData = await response.json();
+      } catch {}
+      throw {
+        status: response.status,
+        message: (errorData as any).message || 'Request failed',
+        data: errorData,
+      };
     }
     return;
   },

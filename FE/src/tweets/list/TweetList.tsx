@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "./tweetList.css";
-import { useTweetDelete, useTweetFetch } from "../../store/useTweetActions";
+import { useTweetDelete } from "../../store/useTweetDelete";
+import { useTweetFetch } from "../../store/useTweetFetch";
 import { useTweetStore } from "../../store/tweetStore";
 
 export default function TweetList() {

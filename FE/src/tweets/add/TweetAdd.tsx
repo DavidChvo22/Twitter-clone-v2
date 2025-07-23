@@ -1,4 +1,4 @@
-import { useTweetAdd } from "../../store/useTweetActions";
+import { useTweetAdd } from "../../store/useTweetAdd";
 import { useState } from "react";
 
 export default function TweetAdd() {
