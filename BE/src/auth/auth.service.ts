@@ -15,8 +15,8 @@ export class AuthService {
     const existing = await this.usersService.findOne(username);
     if (existing) throw new Error('Username already taken');
 
-    const hashed = await bcrypt.hash(password, 10);
-    return this.usersService.create(username, hashed);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return this.usersService.create(username, hashedPassword);
   }
 
   async login(username: string, password: string) {
