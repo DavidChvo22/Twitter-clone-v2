@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -20,30 +24,22 @@ export class TweetService {
   async create(createTweetDto: CreateTweetDto, userId: string): Promise<Tweet> {
     const newTweet = new this.tweetModel({
       content: createTweetDto.content,
-      user: userId,
+      userId: userId,
     });
     const saved = await newTweet.save();
     return saved;
   }
 
-  async delete(
-    tweetId: string,
-    userId: string,
-  ): Promise<'not_found' | 'forbidden' | 'deleted'> {
+  async delete(tweetId: string, userId: string): Promise<void> {
     const tweet = await this.findById(tweetId);
     if (!tweet) {
-      return 'not_found';
+      throw new NotFoundException(`Tweet with ID ${tweetId} not found.`);
     }
-    let tweetUserId: string;
-    if (typeof tweet.user === 'object' && tweet.user && '_id' in tweet.user) {
-      tweetUserId = String(tweet.user._id);
-    } else {
-      tweetUserId = String(tweet.user);
-    }
+
+    const tweetUserId = String(tweet.userId);
     if (tweetUserId !== userId) {
-      return 'forbidden';
+      throw new ForbiddenException('Nemáte oprávnenie vymazať tento tweet.');
     }
     await this.tweetModel.deleteOne({ _id: tweetId }).exec();
-    return 'deleted';
   }
 }

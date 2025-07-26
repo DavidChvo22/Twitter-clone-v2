@@ -7,12 +7,10 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   UseGuards,
-  Request,
-  ForbiddenException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 import { Tweet } from './tweet.schema';
 import { TweetService } from './tweets.service';
@@ -20,16 +18,21 @@ import { CreateTweetDto } from './dto/create-tweet.dto';
 import { CurrentUser } from 'src/auth/current-user.decorator';
 
 @Controller('tweets')
+@ApiTags('tweets')
 export class TweetController {
   constructor(private readonly tweetService: TweetService) {}
 
   @Get()
-  async getTweet(): Promise<Tweet[]> {
+  @ApiOperation({ summary: 'Získať všetky tweety' })
+  @ApiResponse({ status: 200, description: 'Zoznam tweetov' })
+  async getTweets(): Promise<Tweet[]> {
     return this.tweetService.findAll();
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
+  @ApiOperation({ summary: 'Vytvoriť nový tweet' })
+  @ApiResponse({ status: 201, description: 'Tweet bol úspešne vytvorený' })
   async create(
     @Body() createTweetDto: CreateTweetDto,
     @CurrentUser() user: { userId: string; username: string },
@@ -40,17 +43,12 @@ export class TweetController {
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Vymazať tweet' })
+  @ApiResponse({ status: 204, description: 'Tweet bol úspešne vymazaný' })
   async delete(
     @Param('id') id: string,
     @CurrentUser() user: { userId: string; username: string },
   ): Promise<void> {
-    const result = await this.tweetService.delete(id, user.userId);
-
-    if (result === 'not_found') {
-      throw new NotFoundException(`Tweet with ID ${id} not found.`);
-    }
-    if (result === 'forbidden') {
-      throw new ForbiddenException('Nemáte oprávnenie vymazať tento tweet.');
-    }
+    return await this.tweetService.delete(id, user.userId);
   }
 }
