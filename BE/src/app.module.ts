@@ -1,20 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
 
+import { ConfigModule } from './infrastructure/config/config.module';
+import { DatabaseModule } from './infrastructure/database/database.module';
 import { TweetModule } from './tweets/tweets.module';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
-    TweetModule,
-    MongooseModule.forRoot('mongodb://localhost/nest-auth-tutorial'),
-    UsersModule,
-    AuthModule,
-  ],
+  imports: [ConfigModule, DatabaseModule, TweetModule, AuthModule],
   controllers: [AppController],
 })
 export class AppModule {}
