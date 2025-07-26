@@ -17,6 +17,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthenticatedRequest } from 'src/auth/authenticated-request.interface';
 import { Tweet } from './tweet.schema';
 import { TweetService } from './tweets.service';
+import { CreateTweetDto } from './dto/create-tweet.dto';
 
 @Controller('tweets')
 export class TweetController {
@@ -30,10 +31,10 @@ export class TweetController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   async create(
-    @Body() body: { content: string },
+    @Body() createTweetDto: CreateTweetDto,
     @Request() req: AuthenticatedRequest,
   ): Promise<Tweet> {
-    return await this.tweetService.create(body.content, req.user.userId);
+    return await this.tweetService.create(createTweetDto, req.user.userId);
   }
 
   @UseGuards(AuthGuard('jwt'))

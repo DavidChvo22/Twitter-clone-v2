@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Tweet } from './tweet.schema';
+import { CreateTweetDto } from './dto/create-tweet.dto';
 
 @Injectable()
 export class TweetService {
@@ -16,8 +17,11 @@ export class TweetService {
     return this.tweetModel.findById(tweetId).exec();
   }
 
-  async create(content: string, userId: string): Promise<Tweet> {
-    const newTweet = new this.tweetModel({ content: content, user: userId });
+  async create(createTweetDto: CreateTweetDto, userId: string): Promise<Tweet> {
+    const newTweet = new this.tweetModel({
+      content: createTweetDto.content,
+      user: userId,
+    });
     const saved = await newTweet.save();
     return saved;
   }
