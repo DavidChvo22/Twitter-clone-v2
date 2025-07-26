@@ -3,7 +3,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import { User } from '../users/user.schema';
 
-@Schema({ timestamps: true })
+@Schema({ collection: 'tweets', timestamps: true })
 export class Tweet extends Document {
   @Prop({ required: true })
   content: string;
