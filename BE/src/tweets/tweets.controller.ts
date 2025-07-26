@@ -14,10 +14,10 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { AuthenticatedRequest } from 'src/auth/authenticated-request.interface';
 import { Tweet } from './tweet.schema';
 import { TweetService } from './tweets.service';
 import { CreateTweetDto } from './dto/create-tweet.dto';
+import { CurrentUser } from 'src/auth/current-user.decorator';
 
 @Controller('tweets')
 export class TweetController {
@@ -32,9 +32,9 @@ export class TweetController {
   @Post()
   async create(
     @Body() createTweetDto: CreateTweetDto,
-    @Request() req: AuthenticatedRequest,
+    @CurrentUser() user: { userId: string; username: string },
   ): Promise<Tweet> {
-    return await this.tweetService.create(createTweetDto, req.user.userId);
+    return await this.tweetService.create(createTweetDto, user.userId);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -42,9 +42,9 @@ export class TweetController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(
     @Param('id') id: string,
-    @Request() req: AuthenticatedRequest,
+    @CurrentUser() user: { userId: string; username: string },
   ): Promise<void> {
-    const result = await this.tweetService.delete(id, req.user.userId);
+    const result = await this.tweetService.delete(id, user.userId);
 
     if (result === 'not_found') {
       throw new NotFoundException(`Tweet with ID ${id} not found.`);
