@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { Tweet } from './schemas/tweet.schema';
 import { InjectModel } from '@nestjs/mongoose';
+
+import { Tweet } from './tweet.schema';
 
 @Injectable()
 export class TweetService {

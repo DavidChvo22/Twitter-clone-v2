@@ -12,10 +12,11 @@ import {
   Request,
   ForbiddenException,
 } from '@nestjs/common';
-import { TweetService } from './tweet.service';
-import { Tweet } from './schemas/tweet.schema';
 import { AuthGuard } from '@nestjs/passport';
+
 import { AuthenticatedRequest } from 'src/auth/authenticated-request.interface';
+import { Tweet } from './tweet.schema';
+import { TweetService } from './tweets.service';
 
 @Controller('tweets')
 export class TweetController {

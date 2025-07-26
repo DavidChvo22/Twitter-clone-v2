@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { User } from '../../users/schemas/user.schema';
+
+import { User } from '../users/user.schema';
 
 @Schema({ timestamps: true })
 export class Tweet extends Document {
