@@ -12,8 +12,8 @@ export class UsersService {
     return await this.userModel.findOne({ username });
   }
 
-  async create(username: string, password: string): Promise<User> {
-    const user = new this.userModel({ username, password });
+  async create(username: string, hashedPassword: string): Promise<User> {
+    const user = new this.userModel({ username, password: hashedPassword });
     return user.save();
   }
 }
