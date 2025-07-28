@@ -24,7 +24,7 @@ export class TweetsController {
 
   @Get()
   @ApiOperation({ summary: 'Získať všetky tweety' })
-  @ApiResponse({ status: 200, description: 'Zoznam tweetov' })
+  @ApiResponse({ status: 200, description: 'Zoznam tweetov', type: [Tweet] })
   async getTweets(): Promise<Tweet[]> {
     return this.tweetsService.findAll();
   }
@@ -32,7 +32,7 @@ export class TweetsController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   @ApiOperation({ summary: 'Vytvoriť nový tweet' })
-  @ApiResponse({ status: 201, description: 'Tweet bol úspešne vytvorený' })
+  @ApiResponse({ status: 201, description: 'Tweet bol úspešne vytvorený', type: Tweet })
   async create(
     @Body() createTweetDto: CreateTweetDto,
     @CurrentUser() user: { userId: string; username: string },
