@@ -6,12 +6,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(configService: ConfigService) {
-    const jwtSecret =
-      configService.get<string>('JWT_SECRET') ||
-      '00000000000000000000000000000000';
-    if (!jwtSecret) {
-      throw new Error('JWT_SECRET enviroment variable is not set');
-    }
+    const jwtSecret = configService.get<string>('JWT_SECRET', '00000000000000000000000000000000');
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
