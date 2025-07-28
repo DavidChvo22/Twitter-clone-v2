@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 
 import { Tweet } from './tweet.schema';
 import { TweetsService } from './tweets.service';
@@ -31,6 +31,7 @@ export class TweetsController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Vytvoriť nový tweet' })
   @ApiResponse({ status: 201, description: 'Tweet bol úspešne vytvorený', type: Tweet })
   async create(
@@ -42,6 +43,7 @@ export class TweetsController {
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Vymazať tweet' })
   @ApiResponse({ status: 204, description: 'Tweet bol úspešne vymazaný' })
   @HttpCode(HttpStatus.NO_CONTENT)
