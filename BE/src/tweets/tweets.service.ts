@@ -10,7 +10,7 @@ import { Tweet } from './tweet.schema';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 
 @Injectable()
-export class TweetService {
+export class TweetsService {
   constructor(@InjectModel(Tweet.name) private tweetModel: Model<Tweet>) {}
 
   async findAll(): Promise<Tweet[]> {

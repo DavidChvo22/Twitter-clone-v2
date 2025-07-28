@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { Tweet, TweetSchema } from './tweet.schema';
-import { TweetController } from './tweets.controller';
-import { TweetService } from './tweets.service';
+import { TweetsController } from './tweets.controller';
+import { TweetsService } from './tweets.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Tweet.name, schema: TweetSchema }]),
   ],
-  controllers: [TweetController],
-  providers: [TweetService],
+  controllers: [TweetsController],
+  providers: [TweetsService],
 })
-export class TweetModule {}
+export class TweetsModule {}
