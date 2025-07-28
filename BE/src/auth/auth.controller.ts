@@ -17,10 +17,10 @@ export class AuthController {
     return await this.authService.register(body);
   }
 
-  @HttpCode(HttpStatus.OK)
   @Post('login')
   @ApiOperation({ summary: 'Prihlásenie používateľa' })
   @ApiResponse({ status: 200, description: 'Používateľ bol úspešne prihlásený', type: LoginUserResponseDto })
+  @HttpCode(HttpStatus.OK)
   async login(@Body() body: LoginUserDto) {
     return await this.authService.login(body);
   }

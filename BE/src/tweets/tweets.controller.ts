@@ -29,8 +29,8 @@ export class TweetsController {
     return this.tweetsService.findAll();
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Vytvoriť nový tweet' })
   @ApiResponse({ status: 201, description: 'Tweet bol úspešne vytvorený', type: Tweet })
   async create(
@@ -40,11 +40,11 @@ export class TweetsController {
     return await this.tweetsService.create(createTweetDto, user.userId);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Vymazať tweet' })
   @ApiResponse({ status: 204, description: 'Tweet bol úspešne vymazaný' })
+  @HttpCode(HttpStatus.NO_CONTENT)
   async delete(
     @Param('id') id: string,
     @CurrentUser() user: { userId: string; username: string },

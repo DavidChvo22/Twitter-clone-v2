@@ -25,6 +25,14 @@ export class LoginUserDto {
   password: string;
 }
 
+export class UserInfoDto {
+  @ApiProperty({ description: 'ID používateľa', example: '507f1f77bcf86cd799439011' })
+  id: string;
+
+  @ApiProperty({ description: 'Používateľské meno', example: 'JohnDoe' })
+  username: string;
+}
+
 export class LoginUserResponseDto {
   @ApiProperty({
     description: 'JWT access token',
@@ -34,14 +42,7 @@ export class LoginUserResponseDto {
 
   @ApiProperty({
     description: 'Informácie o používateľovi',
-    type: 'object',
-    properties: {
-      id: { type: 'string', example: '507f1f77bcf86cd799439011' },
-      username: { type: 'string', example: 'JohnDoe' },
-    },
+    type: UserInfoDto,
   })
-  user: {
-    id: string;
-    username: string;
-  };
+  user: UserInfoDto;
 } 

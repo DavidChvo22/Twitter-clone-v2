@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 @Schema({ collection: 'users', timestamps: true })
 export class User extends Document {
@@ -13,6 +14,7 @@ export class User extends Document {
 
   @ApiProperty({ description: 'Heslo (hashované)' })
   @Prop({ required: true })
+  @Exclude()
   password: string;
 
   @ApiProperty({ description: 'Dátum vytvorenia' })
